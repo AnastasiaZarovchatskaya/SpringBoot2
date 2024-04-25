@@ -1,14 +1,14 @@
 package web.SpringBoot2.service;
 
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.SpringBoot2.dao.UsersDao;
 import web.SpringBoot2.model.User;
 
 import java.util.List;
 
-@Component
+@Service
 public class UserServiceImp implements UserService {
 
     private UsersDao usersDao;
@@ -16,14 +16,14 @@ public class UserServiceImp implements UserService {
     public UserServiceImp(UsersDao usersDao) {
         this.usersDao = usersDao;
     }
-
+    @Transactional
     @Override
     public List<User> index(){
         return usersDao.index();
     }
     @Transactional
     @Override
-    public User show(int id){
+    public User show(Long id){
         return usersDao.show(id);
     }
 
@@ -41,7 +41,7 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     @Override
-    public void delete(int id){
+    public void delete(Long id){
         usersDao.delete(id);
     }
 }
